@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Sep 29 14:44:29 2022
+
+@author: jshaver
+"""
+
+import os
+from PIL import ImageGrab
+import time
+
+
+os.chdir(r'C:\Users\jshaver\Documents\Automation\screen_info')
+
+ss_region = (1650, 200, 1920, 500)
+ss_img = ImageGrab.grab(ss_region)
+ss_img.save("SS3.jpg")
+
+time.sleep(50)
