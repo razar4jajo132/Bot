@@ -22,17 +22,13 @@ def screenshot(name, xmin, ymin, xmax, ymax):
     ss_img.save(name + ".jpg")
     
 def img_compare(mas_img, chk_img):
-   
     master_img = cv.imread(mas_img, cv.IMREAD_UNCHANGED)
     check_img = cv.imread(chk_img, cv.IMREAD_UNCHANGED)
-    
     result = cv.matchTemplate(master_img, check_img, cv.TM_CCOEFF_NORMED)
-    
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-
     print('Best match top left position: %s' % str(max_loc))
     print('Best match confidence: %s' % max_val)
-    return(result)
+    return(max_val)
 
 def ran_delay():
     value=random.random()*10
@@ -47,23 +43,50 @@ def ran_click(min_x,min_y,max_x,max_y):
 # full_inv = 
 # empty_plot = .97
 
-
+###################### SCREEN SHOTS ##################################
 fullscreen = screenshot
 inventory = screenshot
 plot = screenshot
 desktop = screenshot
 
+################### CLICK LOCATIONS ##############################
+paper_cl = ran_click(1725, 220, 1743, 237)
+iron_cl = ran_click(1725, 250, 1743, 270)
+res_cl = ran_click(1393, 140, 1495, 243)
+
+########################## IMAGE COMPARE ###############################
 check_plot = img_compare
 check_inventory = img_compare
 
-
+####################### PIXEL IMAGE LOCATIONS ########################
 fullscreen('fullscreen', 960, 0, 1920, 540)
 desktop('desktop', 0, 0, 1920, 1080)
 inventory('inventory', 1700, 240, 1865, 447)
 plot('plot', 1380, 120, 1500, 360)
 
-print('Plot:')
-img_compare('empty_plot.jpg', 'plot.jpg')
 
-print('Inventory:')
-img_compare('inv1.jpg', 'inventory.jpg')
+
+try:
+    while True:
+        
+        check_plot = img_compare('empty_plot.jpg', 'plot.jpg')
+        
+        img_compare('inv1.jpg', 'inventory.jpg')
+
+
+
+
+
+
+
+except KeyboardInterrupt:
+    pass
+print('Program Complete')
+
+
+
+
+
+
+
+
