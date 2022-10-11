@@ -51,13 +51,14 @@ def ran_click(min_x,min_y,max_x,max_y):
 fullscreen = screenshot
 inventory = screenshot
 plot = screenshot
+desktop = screenshot
 
 check_plot = img_compare
 check_inventory = img_compare
 
 
 fullscreen('fullscreen', 960, 0, 1920, 540)
-desktop('desktop', 960, 0, 1920, 540)
+desktop('desktop', 0, 0, 1920, 1080)
 inventory('inventory', 1700, 240, 1865, 447)
 plot('plot', 1380, 120, 1500, 360)
 
@@ -66,14 +67,3 @@ img_compare('empty_plot.jpg', 'plot.jpg')
 
 print('Inventory:')
 img_compare('inv1.jpg', 'inventory.jpg')
-
-
-
-
-
-
-
-
-
-
-
