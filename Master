@@ -12,6 +12,8 @@ import os
 from PIL import ImageGrab
 import cv2 as cv
 import pyautogui
+import random
+import time
 
 os.chdir(r'C:/Users/razar/OneDrive/Documents/Bot/image')
 def screenshot(name, xmin, ymin, xmax, ymax):
@@ -19,14 +21,19 @@ def screenshot(name, xmin, ymin, xmax, ymax):
     ss_img = ImageGrab.grab(ss_region)
     ss_img.save(name + ".jpg")
     
-def img_compare(mas_img, chk_img): 
+def img_compare(mas_img, chk_img):
+   
     master_img = cv.imread(mas_img, cv.IMREAD_UNCHANGED)
     check_img = cv.imread(chk_img, cv.IMREAD_UNCHANGED)
+    
     result = cv.matchTemplate(master_img, check_img, cv.TM_CCOEFF_NORMED)
+    
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+
     print('Best match top left position: %s' % str(max_loc))
     print('Best match confidence: %s' % max_val)
     return(result)
+
 def ran_delay():
     value=random.random()*10
     print(value)
@@ -36,8 +43,6 @@ def ran_click(min_x,min_y,max_x,max_y):
     x_click = random.randint(min_x, max_x)
     y_click = random.randint(min_y, max_y)
     return(x_click, y_click)
-    
-    
     
 # full_inv = 
 # empty_plot = .97
@@ -52,13 +57,15 @@ check_inventory = img_compare
 
 
 fullscreen('fullscreen', 960, 0, 1920, 540)
+desktop('desktop', 960, 0, 1920, 540)
 inventory('inventory', 1700, 240, 1865, 447)
 plot('plot', 1380, 120, 1500, 360)
 
+print('Plot:')
 img_compare('empty_plot.jpg', 'plot.jpg')
 
-
-
+print('Inventory:')
+img_compare('inv1.jpg', 'inventory.jpg')
 
 
 
