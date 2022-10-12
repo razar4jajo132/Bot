@@ -11,7 +11,7 @@ Created on Sat Oct  1 22:51:46 2022
 import os
 from PIL import ImageGrab
 import cv2 as cv
-import pyautogui
+import pyautogui #pyautogui.mouseDown(); pyautogui.mouseUp()
 import random
 import time
 
@@ -28,16 +28,19 @@ def img_compare(mas_img, chk_img):
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
     print('Best match top left position: %s' % str(max_loc))
     print('Best match confidence: %s' % max_val)
+    max_val = max_val * 1000
     return(max_val)
 
 def ran_delay():
     value=random.random()*10
-    print(value)
+    print('Delay amount: ' + value)
     time.sleep(value)
     
 def ran_click(min_x,min_y,max_x,max_y):
     x_click = random.randint(min_x, max_x)
     y_click = random.randint(min_y, max_y)
+    #need to add pyautogui down and up with a delay timer in teh clicker
+    #figure out the touch screen right click delay amount
     return(x_click, y_click)
     
 # full_inv = 
@@ -52,13 +55,13 @@ desktop = screenshot
 ################### CLICK LOCATIONS ##############################
 paper_cl = ran_click(1725, 220, 1743, 237)
 iron_cl = ran_click(1725, 250, 1743, 270)
-res_cl = ran_click(1393, 140, 1495, 243)
+res_cl = ran_click(1393, 140, 1495, 243) #click on resource 
 
-########################## IMAGE COMPARE ###############################
-check_plot = img_compare
-check_inventory = img_compare
+########################## IMAGE COMPARE #########################
+check_plot = img_compare('empty_plot.jpg', 'plot.jpg')
+check_inventory = img_compare('inv1.jpg', 'inventory.jpg')
 
-####################### PIXEL IMAGE LOCATIONS ########################
+####################### PIXEL IMAGE LOCATIONS ####################
 fullscreen('fullscreen', 960, 0, 1920, 540)
 desktop('desktop', 0, 0, 1920, 1080)
 inventory('inventory', 1700, 240, 1865, 447)
@@ -66,22 +69,44 @@ plot('plot', 1380, 120, 1500, 360)
 
 
 
-try:
-    while True:
-        
-        check_plot = img_compare('empty_plot.jpg', 'plot.jpg')
-        
-        img_compare('inv1.jpg', 'inventory.jpg')
-
-
-
-
-
-
-
-except KeyboardInterrupt:
+# try:
+#     while True:
+       
+###################### PLOT CHECK LOOP ##########################
+plot('plot', 1380, 120, 1500, 360)
+check_plot = int(img_compare('empty_plot.jpg', 'plot.jpg'))
+if check_plot <= 950:
+    res_cl()
+else:
     pass
-print('Program Complete')
+
+
+#################### INVENTORY CHECK LOOP #######################
+for i in range(2):
+    inventory('inventory', 1700, 240, 1865, 447)
+    check_inventory = int(img_compare('inv1.jpg', 'inventory.jpg'))
+    if check_inventory >= 950:
+        paper_cl = ran_click(1725, 220, 1743, 237)
+        ran_delay()
+        iron_cl = ran_click(1725, 250, 1743, 270)
+    else:
+        pass
+    
+
+    
+check_plot = img_compare('empty_plot.jpg', 'plot.jpg')
+
+img_compare('inv1.jpg', 'inventory.jpg')
+
+
+
+
+
+
+
+# except KeyboardInterrupt:
+#     pass
+# print('Program Complete')
 
 
 
