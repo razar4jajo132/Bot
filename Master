@@ -26,8 +26,8 @@ def img_compare(mas_img, chk_img):
     check_img = cv.imread(chk_img, cv.IMREAD_UNCHANGED)
     result = cv.matchTemplate(master_img, check_img, cv.TM_CCOEFF_NORMED)
     min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-    print('Best match top left position: %s' % str(max_loc))
-    print('Best match confidence: %s' % max_val)
+    # print('Best match top left position: %s' % str(max_loc))
+    # print('Best match confidence: %s' % max_val)
     max_val = max_val * 1000
     return(max_val)
 
@@ -76,7 +76,8 @@ plot('plot', 1380, 120, 1500, 360)
 plot('plot', 1380, 120, 1500, 360)
 check_plot = int(img_compare('empty_plot.jpg', 'plot.jpg'))
 if check_plot <= 950:
-    res_cl()
+    ran_click(1393, 140, 1495, 243)
+    print(str(res_cl[0]))
 else:
     pass
 
@@ -90,6 +91,7 @@ for i in range(2):
         ran_delay()
         iron_cl = ran_click(1725, 250, 1743, 270)
     else:
+        print('inventory not full')
         pass
     
 
@@ -107,11 +109,3 @@ img_compare('inv1.jpg', 'inventory.jpg')
 # except KeyboardInterrupt:
 #     pass
 # print('Program Complete')
-
-
-
-
-
-
-
-
