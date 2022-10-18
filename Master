@@ -54,9 +54,9 @@ plot = screenshot
 desktop = screenshot
 
 ################### CLICK LOCATIONS ##############################
-paper_cl = ran_click(1725, 220, 1743, 237)
-iron_cl = ran_click(1725, 250, 1743, 270)
-res_cl = ran_click(1393, 140, 1495, 243) #click on resource 
+# paper_cl = ran_click(1725, 220, 1743, 237)
+# iron_cl = ran_click(1725, 250, 1743, 270)
+# res_cl = ran_click(1393, 140, 1495, 243) #click on resource 
 
 ########################## IMAGE COMPARE #########################
 check_plot = img_compare('empty_plot.jpg', 'plot.jpg')
@@ -87,8 +87,9 @@ else:
 
 
 #################### INVENTORY CHECK LOOP #######################
-ran_delay()
-for i in range(2):
+
+for i in range(3):
+    ran_delay()
     inventory('inventory', 1700, 240, 1865, 447)
     check_inventory = int(img_compare('inv1.jpg', 'inventory.jpg'))
     if check_inventory >= 950:
@@ -104,16 +105,6 @@ for i in range(2):
     
 
     
-check_plot = img_compare('empty_plot.jpg', 'plot.jpg')
-
-img_compare('inv1.jpg', 'inventory.jpg')
-
-
-
-
-
-
-
 # except KeyboardInterrupt:
 #     pass
 # print('Program Complete')
