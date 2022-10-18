@@ -76,8 +76,11 @@ plot('plot', 1380, 120, 1500, 360)
 plot('plot', 1380, 120, 1500, 360)
 check_plot = int(img_compare('empty_plot.jpg', 'plot.jpg'))
 if check_plot <= 950:
-    ran_click(1393, 140, 1495, 243)
-    print(str(res_cl[0]))
+    res_cl = ran_click(1393, 140, 1495, 243)
+    cl_x = res_cl[0]
+    cl_y = res_cl[1]
+    pyautogui.click(x=cl_x, y=cl_y)
+    print('click at: ' + str(cl_x) + ' and ' + str(cl_y))
 else:
     pass
 
